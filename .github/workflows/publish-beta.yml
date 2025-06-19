@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main ]
     paths:
-        - 'Pek.WAF/**'
+        - 'DH.VueCliMiddleware/**'
   pull_request:
     branches: [ main ]
     paths:
-        - 'Pek.WAF/**'
+        - 'DH.VueCliMiddleware/**'
   workflow_dispatch:
 
 jobs:
@@ -23,6 +23,7 @@ jobs:
         dotnet-version: |
           8.x
           9.x
+          10.x
     - name: Get Version
       run: echo "VERSION=$(date '+%Y.%m%d-beta%H%M')" >> $GITHUB_ENV
     - name: Build
@@ -30,7 +31,7 @@ jobs:
         dotnet build -c Release --version-suffix ${{ env.VERSION }}
     - name: Pack
       run: |
-        dotnet pack --no-build --version-suffix ${{ env.VERSION }} -c Release -o out Pek.WAF/Pek.WAF.csproj
+        dotnet pack --no-build --version-suffix ${{ env.VERSION }} -c Release -o out DH.VueCliMiddleware/DH.VueCliMiddleware.csproj
 
     - name: Publish
       run: |
